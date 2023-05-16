@@ -13,7 +13,7 @@ secrets:
 
 services:
   app:
-    image: 127.0.0.1:5000/app:1
+    image: tinymosi/price-checker-tg-bot:main
     build:
       context: ./
       dockerfile: Dockerfile
