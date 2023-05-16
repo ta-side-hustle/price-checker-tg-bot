@@ -1,0 +1,51 @@
+version: '3.8'
+
+volumes:
+  node_modules:
+
+secrets:
+  db_user:
+    file: secrets/db_user.txt
+  db_password:
+    file: secrets/db_password.txt
+  dotenv_key:
+    file: secrets/dotenv_key.txt
+
+services:
+  app:
+    restart: no
+    environment:
+      TS_NODE: true
+      NODE_ENV: development
+      DOTENV_KEY_FILE: dotenv_key
+      DB_HOSTNAME: db
+      DB_USER_FILE: db_user
+      DB_PASSWORD_FILE: db_password
+    secrets:
+      - dotenv_key
+      - db_user
+      - db_password
+    expose:
+      - 9229
+    ports:
+      - "9229:9229"
+    volumes:
+      - .:/opt/project
+      - node_modules:/opt/project/node_modules
+    working_dir: /opt/project
+    command: npm run dev
+  db-ui:
+    image: mongo-express
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+    environment:
+      ME_CONFIG_MONGODB_SERVER: db
+      ME_CONFIG_MONGODB_ADMINUSERNAME_FILE: /run/secrets/db_user
+      ME_CONFIG_MONGODB_ADMINPASSWORD_FILE: /run/secrets/db_password
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: 'true'
+    secrets:
+      - db_user
+      - db_password

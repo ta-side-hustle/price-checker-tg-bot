@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "include": ["src/**/*.ts"],
+  "exclude": [
+    "node_modules/**/*"
+  ],
+  "ts-node": {
+    "esm": true,
+  },
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "./src/typings/global.d.ts",
+      "./node_modules/@types"
+    ],
+    // Bundler mode
+    "allowSyntheticDefaultImports": true,
+
+    // Base compiler options
+    "lib": [
+      "ESNext"
+    ],
+    "skipLibCheck": true,
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "removeComments": true,
+    "useDefineForClassFields": true,
+
+    "paths": {},
+
+    "resolveJsonModule": true,
+
+    "isolatedModules": true,
+//    "verbatimModuleSyntax": true,
+
+    // Include types in build
+    "declaration": true,
+    "declarationMap": true,
+    "inlineSources": false,
+
+    // Consistent imports from CommonJS
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+
+    // Dev env options
+    "sourceMap": true,
+    "preserveWatchOutput": true,
+
+    // Strict Checks
+    "strict": true,
+    "allowJs": false,
+    "noPropertyAccessFromIndexSignature": true,
+    "exactOptionalPropertyTypes": true,
+
+    // Linter Checks
+    "noImplicitOverride": true,
+    "noImplicitReturns": true, // https://eslint.org/docs/rules/consistent-return ?
+    "noFallthroughCasesInSwitch": true, // https://eslint.org/docs/rules/no-fallthrough
+    "noUnusedLocals": true, // https://eslint.org/docs/rules/no-unused-vars
+    "noUnusedParameters": true // https://eslint.org/docs/rules/no-unused-vars#args
+  }
+}
